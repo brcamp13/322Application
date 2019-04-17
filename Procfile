@@ -1,1 +1,1 @@
-web: node organizer.js
+web: node index.js

@@ -1,18 +1,19 @@
 {
   "name": "votingapp322",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Electronic Voting System",
   "engines": {
     "node": "11.x"
   },
-  "main": "organizer.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node organizer.js",
-    "test": "node organizer.js"
+    "start": "node index.js",
+    "test": "node index.js"
   },
   "dependencies": {
-    "ejs": "^2.5.6",
-    "express": "^4.15.2",
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "pg": "^7.10.0"
   },
   "devDependencies": {

@@ -5,15 +5,11 @@
 
 
 <form action="/organizer" method="post">
-    <% for (var i in organizer){%>
-        VoterIDs: <input type="text" name="VIDs[]" value="<%= organizers[i].VIDs %>" /><br><br>
-        <input type="submit" value="accept"/><br><br><hr>
-    <%} %>
+    VoterIDs: <input type="text" name="VIDs" value="default" /><br><br>
+    <input type="submit" value="OK">
 </form>
 
-<!--PERSONAL SCRIPT JavaScript-->
-<script type="text/javascript" src="organizer.js">
-</script>
+
 
 </head>
 <body><!-- Your web--></body>
