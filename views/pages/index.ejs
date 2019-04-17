@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+
+<form action="/organizer" method="post">
+    <% for (var i in organizer){%>
+        VoterIDs: <input type="text" name="VIDs[]" value="<%= organizers[i].VIDs %>" /><br><br>
+        <input type="submit" value="accept"/><br><br><hr>
+    <%} %>
+</form>
+
+<!--PERSONAL SCRIPT JavaScript-->
+<script type="text/javascript" src="organizer.js">
+</script>
+
+</head>
+<body><!-- Your web--></body>
+</html>
