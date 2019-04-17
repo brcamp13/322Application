@@ -16,4 +16,5 @@
   app.post('/organizer', function(req, res, next){
       // req.body object has your form values
       console.log(req.body.VIDs);
+      res.end('It worked!');
   })
