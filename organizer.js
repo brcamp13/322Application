@@ -1,4 +1,3 @@
-
 var VIDForm = document.getElementById("VIDForm");
 $('#VIDForm').submit(function() {
     var text = VIDForm.elements[0].value;

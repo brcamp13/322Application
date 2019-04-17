@@ -1,0 +1,32 @@
+{
+    "name": "votingapp322",
+    "version": "0.1",
+    "description": "Electronic Voting System",
+    "engines": {
+      "node": "11.x"
+    },
+    "main": "organizer.js",
+    "scripts": {
+      "start": "node organizer.js",
+      "test": "node organizer.js"
+    },
+    "dependencies": {
+      "ejs": "^2.5.6",
+      "express": "^4.15.2"
+    },
+    "devDependencies": {
+      "request": "^2.81.0",
+      "tape": "^4.7.0"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/brcamp13/322Application"
+    },
+    "keywords": [
+      "node",
+      "heroku",
+      "express"
+    ],
+    "license": "MIT"
+  }
+  
