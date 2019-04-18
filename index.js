@@ -31,15 +31,18 @@ function addVoters(vids, allowed, res) {
   var arr = [];
   vids = vids.split(" ");
   for (vid of vids) {
-    arr.push([vid,allowed]);
+    arr.push([vid, allowed]);
   }
-  client.query(format('INSERT INTO voters (id, valid) VALUES %L', arr), (error, result) => {
+  var str = format('INSERT INTO voters (id, valid) VALUES %L ON CONFLICT (id) DO UPDATE SET valid = excluded.valid',arr);
+  console.log(str);
+  client.query(str, (error, result) => {
     if (error) {
       res.send(error.detail)
     }
+    res.send(`Users recorded with IDs` + vids)
   })
-  res.send(`Users recorded with IDs` + vids)
 }
+
 app.post('/vid', function(req, res, next){
     addVoters(req.body.vids, true, res)
 })
