@@ -18,11 +18,25 @@ const buttonRowStyle = {
 }
 
 const containerStyle = {
-    paddingTop: '7rem', 
+    paddingTop: '4rem', 
 }
 
 const formInputStyle = {
-    paddingBottom: '2rem'
+    paddingBottom: '2rem', 
+    fontFamily: 'PT Sans'
+}
+
+const tableRowStyle = {
+    fontFamily: 'PT Sans'
+}
+
+const submitButtonStyle = {
+    fontFamily: 'PT Sans', 
+    paddingBottom: '3rem'
+}
+
+const tableHeaderStyle = {
+    fontFamily: 'PT Sans'
 }
 
 
@@ -56,20 +70,11 @@ class Vote extends React.Component {
         this.state = initialState
         this.onButtonSubmit = this.onButtonSubmit.bind(this)
         this.onInputChange = this.onInputChange.bind(this)
-        this.search = this.search.bind(this)
     }
 
-    search = (nameKey, myArray) => {
-        for (var i=0; i < myArray.length; i++) {
-            if (myArray[i].name === nameKey) {
-                return myArray[i];
-            }
-        }
-    }
 
     //When the user submits a vote, update vote count, don't let them submit again
     onButtonSubmit = () => {
-        console.log(this.state.choice)
         this.setState((state) => ({candidates: state.race.candidates[
             state.race.candidates.findIndex(obj => obj.name == state.choice)
         ].voteCount+=1}))
@@ -90,7 +95,9 @@ class Vote extends React.Component {
                                 <Button variant="primary" onClick={this.props.onLogoutSubmit}>Logout</Button>
                             </Col>
                         </Row>
-                    </Container>
+                </Container>
+
+                <hr></hr>
 
                 <div style={containerStyle}>
 
@@ -103,11 +110,11 @@ class Vote extends React.Component {
                     <Container>
                         <Row>
                             <Col md={{ span: 4, offset: 4}} align='center'>
-                                <h2>{this.state.race.title}</h2>
+                                <h2 style={tableHeaderStyle}><strong><em>{this.state.race.title}</em></strong></h2>
                             </Col>
                         </Row>
 
-                        <Row>
+                        <Row style={tableRowStyle}>
                             <Col md={{ span: 8, offset: 2}}>
 
                                 <Table bordered hover>
@@ -143,7 +150,7 @@ class Vote extends React.Component {
                                     </Row>
                                 </Form>
 
-                                <Row>
+                                <Row style={submitButtonStyle}>
                                     <Col md={{span: 6, offset: 3}} align="center">
                                         <Button variant="primary" onClick={this.onButtonSubmit}>Submit</Button>
                                     </Col>
