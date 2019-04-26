@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const bodyParser = require('body-parser')
 var format = require('pg-format');
 const { Pool, Client } = require('pg')
 const PORT = process.env.PORT || 5000
@@ -19,13 +18,31 @@ client.connect();
 app = express()
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}))
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'html')
-app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/views/pages/index.html')))
+app.get('/organizer', (req, res) => res.sendFile(path.join(__dirname+'/views/pages/index.html')))
 app.get('/jquery-3.3.1.js', (req, res) => res.sendFile(path.join(__dirname+'/jquery-3.3.1.js')))
 
+app.post('/checkId', (req,res) =>{
+  userId = parseInt(req.body.userId)
+  console.log(req.body)
+  var str = format('SELECT id, valid FROM voters WHERE id=%L AND valid=%L',userId, true);
+  client.query(str, (error, result) => {
+    console.log(result)
+   
+    if (error) {
+      res.send(error.detail);
+    }
+    res.send({valid:result.rowCount != 0});
+    
+  })
+});
 
 function addVoters(vids, allowed, res) {
   var arr = [];
@@ -34,7 +51,6 @@ function addVoters(vids, allowed, res) {
     arr.push([vid, allowed]);
   }
   var str = format('INSERT INTO voters (id, valid) VALUES %L ON CONFLICT (id) DO UPDATE SET valid = excluded.valid',arr);
-  console.log(str);
   client.query(str, (error, result) => {
     if (error) {
       res.send(error.detail)
