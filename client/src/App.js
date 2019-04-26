@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const initialState = {
   route: 'login', 
-  userId: ''
+  userId: '',
+  canVote: false
 }
 
 
@@ -24,32 +25,32 @@ class App extends Component {
   onIdChange = (event) => {
     this.setState({userId: event.target.value})
   }
-
+  
   //Changes routes after submitting login 
   onButtonSubmit = () => {
+    var t = this;
     var canVote = fetch('/checkId', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body:JSON.stringify({
-          userId: this.state.userId
-        })
+        body:JSON.stringify({userId: this.state.userId})
     })
     .then(function(res) {
       return res.json()
     })
     .then(function(value) {
-      return value.valid
+      console.log(value)
+      t.setState({canVote: value.valid}, function() {
+        if(this.state.canVote) {
+          this.setState({route: 'vote'})
+        } else {
+          console.log("Invalid user id")
+        }
+      })
     })
-    
-    if(canVote) {
-      this.setState({route: 'vote'})
-    }else {
-      console.log("Invalid user id")
-    }
   }
-
+ 
   //When they logout, go back to login
   onLogoutSubmit = () => {
     this.setState(initialState)

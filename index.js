@@ -37,10 +37,10 @@ app.post('/checkId', (req,res) =>{
     console.log(result)
    
     if (error) {
-      res.send(error.detail);
+      console.log(error)
+      res.send(error.detail)
     }
     res.send({valid:result.rowCount != 0});
-    
   })
 });
 
